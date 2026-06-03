@@ -1,27 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Consistency Tracker</title>
-    <meta name="description" content="Consistency Tracker — built on Replit. Update this description to reflect the app." />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Consistency Tracker" />
-    <meta property="og:description" content="Consistency Tracker — built on Replit. Update this description to reflect the app." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+
+    <!-- ============================================================
+         PRIMARY SEO META TAGS
+    ============================================================ -->
+    <title>Consistency Tracker — Build Habits, Track Streaks & Achieve Your Goals</title>
+    <meta name="description" content="Consistency Tracker is a free habit tracker app that helps you build daily routines, track streaks, log check-ins, and stay consistent on your 30, 60, or 90-day challenges. Start your journey today." />
+    <meta name="keywords" content="habit tracker, consistency tracker, daily habits, streak tracker, challenge tracker, build habits, productivity app, daily check-in, goal tracker, routine builder" />
+    <meta name="author" content="Consistency Tracker" />
+    <meta name="application-name" content="Consistency Tracker" />
+    <meta name="generator" content="Vite + React" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://consistencytracker.vercel.app/" />
+
+    <!-- ============================================================
+         GEO / GEOGRAPHIC TARGETING
+    ============================================================ -->
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="general" />
+
+    <!-- ============================================================
+         OPEN GRAPH (Facebook, LinkedIn, WhatsApp, Discord, Slack)
+    ============================================================ -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Consistency Tracker" />
+    <meta property="og:title" content="Consistency Tracker — Build Habits & Track Streaks Daily" />
+    <meta property="og:description" content="Create personal challenges, log daily check-ins, track your streaks, and build life-changing habits — all in one beautiful app. Free forever." />
+    <meta property="og:url" content="https://consistencytracker.vercel.app/" />
+    <meta property="og:image" content="https://consistencytracker.vercel.app/opengraph.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Consistency Tracker app — habit tracking dashboard showing streaks and daily check-ins" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ============================================================
+         TWITTER / X CARD
+    ============================================================ -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Consistency Tracker" />
-    <meta name="twitter:description" content="Consistency Tracker — built on Replit. Update this description to reflect the app." />
+    <meta name="twitter:site" content="@consistencyapp" />
+    <meta name="twitter:creator" content="@consistencyapp" />
+    <meta name="twitter:title" content="Consistency Tracker — Build Habits & Track Streaks Daily" />
+    <meta name="twitter:description" content="Create personal challenges, log daily check-ins, track your streaks, and build life-changing habits — all in one beautiful app. Free forever." />
+    <meta name="twitter:image" content="https://consistencytracker.vercel.app/opengraph.jpg" />
+    <meta name="twitter:image:alt" content="Consistency Tracker app dashboard" />
+
+    <!-- ============================================================
+         PWA / MOBILE APP META TAGS
+    ============================================================ -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#3b82f6" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Consistency" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <!-- ============================================================
+         SITEMAP DISCOVERY
+    ============================================================ -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- ============================================================
+         PERFORMANCE — FONT PRECONNECT
+    ============================================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- ============================================================
+         JSON-LD STRUCTURED DATA (Schema.org)
+         Critical for GEO — AI engines (ChatGPT, Perplexity, Gemini)
+         use structured data to confidently cite and summarize apps.
+    ============================================================ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://consistencytracker.vercel.app/#webapp",
+          "name": "Consistency Tracker",
+          "alternateName": "Consistency",
+          "url": "https://consistencytracker.vercel.app/",
+          "description": "Consistency Tracker is a free habit tracking web app that helps individuals build daily routines through personal challenges. Users can create 30, 60, or 90-day challenges, log daily check-ins, track completion streaks, view progress analytics, earn rewards, and set daily intentions.",
+          "applicationCategory": "LifestyleApplication",
+          "applicationSubCategory": "Habit Tracker",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript. Works on all modern browsers.",
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Create personal 30, 60, or 90-day challenges",
+            "Daily habit check-in and task logging",
+            "Streak tracking and consistency scoring",
+            "Progress analytics and charts",
+            "Daily intention setting",
+            "Rewards and milestone system",
+            "Works offline as a PWA",
+            "Dark mode interface"
+          ],
+          "screenshot": {
+            "@type": "ImageObject",
+            "url": "https://consistencytracker.vercel.app/opengraph.jpg",
+            "caption": "Consistency Tracker dashboard showing daily check-in, streak counter, and habit progress"
+          },
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://consistencytracker.vercel.app/opengraph.jpg",
+            "width": 1200,
+            "height": 630
+          },
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://consistencytracker.vercel.app/#organization",
+            "name": "Consistency Tracker",
+            "url": "https://consistencytracker.vercel.app/"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://consistencytracker.vercel.app/#website",
+          "url": "https://consistencytracker.vercel.app/",
+          "name": "Consistency Tracker",
+          "description": "Free habit tracker app to build daily routines, track streaks, and stay consistent on your personal challenges.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://consistencytracker.vercel.app/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://consistencytracker.vercel.app/"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://consistencytracker.vercel.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Consistency Tracker?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Consistency Tracker is a free web app that helps you build and maintain daily habits. You create personal challenges (e.g. '30-day fitness challenge'), define the tasks involved, check in daily, and track your streak and progress over time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Consistency Tracker free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Consistency Tracker is completely free to use. There are no subscriptions or hidden fees."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Consistency Tracker work offline?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Consistency Tracker is a Progressive Web App (PWA) and works offline. You can also install it on your home screen for a native app experience."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I track my habits with Consistency Tracker?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Create a challenge, add the daily habits or tasks you want to track, then check in each day to mark them complete. The app shows your streak, consistency percentage, and progress analytics."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

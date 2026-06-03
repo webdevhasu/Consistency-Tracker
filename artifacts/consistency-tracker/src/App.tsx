@@ -13,6 +13,16 @@ import DailyIntention from './pages/daily-intention';
 
 export type View = 'home' | 'check-in' | 'progress' | 'rewards' | 'settings' | 'create' | 'daily';
 
+const PAGE_TITLES: Record<View, string> = {
+  'home':      'Consistency Tracker — Dashboard',
+  'check-in':  'Daily Check-In | Consistency Tracker',
+  'progress':  'My Progress & Analytics | Consistency Tracker',
+  'rewards':   'Rewards & Milestones | Consistency Tracker',
+  'settings':  'Settings | Consistency Tracker',
+  'create':    'Create a New Challenge | Consistency Tracker',
+  'daily':     'Daily Intention | Consistency Tracker',
+};
+
 function App() {
   const [currentView, setCurrentView] = useState<View>('home');
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,6 +31,12 @@ function App() {
     document.documentElement.classList.add('dark');
     setIsLoaded(true);
   }, []);
+
+  // Update <title> and meta description on every view change for
+  // better shareability, analytics accuracy, and browser tab UX.
+  useEffect(() => {
+    document.title = PAGE_TITLES[currentView];
+  }, [currentView]);
 
   if (!isLoaded) return null;
 
@@ -41,3 +57,4 @@ function App() {
 }
 
 export default App;
+

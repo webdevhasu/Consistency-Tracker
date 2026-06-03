@@ -22,25 +22,57 @@ export default defineConfig({
     runtimeErrorOverlay(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml'],
       manifest: {
         name: 'Consistency Tracker',
         short_name: 'Consistency',
-        description: 'Track your daily habits and build consistency.',
+        description: 'Build daily habits, track streaks, and stay consistent with personal 30, 60, or 90-day challenges. Free habit tracker PWA.',
         theme_color: '#3b82f6',
         background_color: '#09090b',
         display: 'standalone',
         orientation: 'portrait',
+        lang: 'en-US',
+        dir: 'ltr',
         scope: basePath,
         start_url: basePath,
+        id: basePath,
+        categories: ['lifestyle', 'health', 'productivity', 'utilities'],
         icons: [
           { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+        ],
+        screenshots: [
+          {
+            src: 'opengraph.jpg',
+            sizes: '1200x630',
+            type: 'image/jpeg',
+            label: 'Consistency Tracker — Dashboard showing habit streaks and daily check-in',
+          },
         ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         navigateFallback: null,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'gstatic-fonts-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false,

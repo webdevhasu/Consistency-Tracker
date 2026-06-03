@@ -1,2 +1,52 @@
+# Allow all standard crawlers
 User-agent: *
 Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+
+# ================================================================
+# GEO: Opt-in AI crawlers (Generative Engine Optimization)
+# These bots power ChatGPT Browse, Perplexity, Bing Copilot, etc.
+# Explicitly allowing them improves AI-generated citations.
+# ================================================================
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+# OpenAI plugin crawler
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google Extended (Gemini training/search)
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic / Claude
+User-agent: anthropic-ai
+Allow: /
+
+# Common Crawl (used by many AI systems)
+User-agent: CCBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Meta / Llama
+User-agent: FacebookBot
+Allow: /
+
+# Apple Applebot
+User-agent: Applebot
+Allow: /
+
+# ================================================================
+# SITEMAP
+# ================================================================
+Sitemap: https://consistencytracker.vercel.app/sitemap.xml

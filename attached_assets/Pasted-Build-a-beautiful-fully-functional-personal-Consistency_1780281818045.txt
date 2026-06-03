@@ -1,0 +1,152 @@
+Build a beautiful, fully-functional personal Consistency Tracker as a single-page React app (JSX) using Tailwind CSS and localStorage for persistence. This is for personal use — no login needed.
+
+═══════════════════════════════════════════
+CORE CONCEPT
+═══════════════════════════════════════════
+User creates "Challenges". Each challenge has:
+- A name (e.g. "90-Day Transformation")
+- A purpose / motivation (WHY are you doing this — shown daily as reminder)
+- Start date + duration in days
+- A list of daily tasks/habits to tick off each day
+- An end reward (what you'll give yourself on 100% completion)
+- Optional milestone rewards at Day 7, Day 21, Day 30, halfway, etc.
+
+═══════════════════════════════════════════
+SCREENS / PAGES (Single Page App with views)
+═══════════════════════════════════════════
+
+1. HOME DASHBOARD
+   - Active challenge card showing:
+     → Challenge name + purpose quote
+     → Big circular progress ring (Days done / Total days)
+     → Today's date + "Day X of Y"
+     → Current streak 🔥 (consecutive days with 100% tasks done)
+     → Overall consistency % (total ticks / total possible ticks)
+     → "Check In Today" button (glows if not yet done today)
+     → Days remaining countdown
+   - If no challenge exists: big "Create Your First Challenge" CTA
+
+2. DAILY CHECK-IN SCREEN
+   - Shows: "Day X — [Date]"
+   - Shows the PURPOSE/motivation text at top (keep them inspired)
+   - List of all daily tasks as large, tappable checkboxes
+   - Each task shows its individual completion rate (e.g. "✓ 68% days")
+   - Optional note field: "How was today? (optional)"
+   - Optional mood selector: 😔 😐 🙂 😄 (emoji buttons)
+   - "Complete Day ✓" button at bottom — disabled until at least 1 task ticked
+   - If all tasks ticked: show a motivational message + small celebration
+   - Can re-open today's check-in to edit until midnight
+
+3. PROGRESS & ANALYTICS PAGE
+   - GitHub-style heatmap calendar for the full challenge duration
+     → Green = full day (all tasks), Yellow = partial, Red = missed, Gray = future
+   - Per-task breakdown table:
+     → Task name | Days completed | % completion | Streak | Weakest day of week
+   - Weekly consistency bar chart (Week 1, Week 2, etc.)
+   - Line graph: daily completion % over time (trend)
+   - Stats cards:
+     → Best streak ever | Current streak | Total days done | Total days missed
+     → Most consistent task | Least consistent task
+     → Best day of week | Worst day of week
+   - "You are X% through your challenge" progress bar
+
+4. REWARDS & MILESTONES PAGE
+   - Show end reward prominently at top (locked 🔒 until 100% complete)
+   - Milestone cards:
+     → Day 7 complete ✓ | Day 21 | Day 30 | 50% | 75% | 100%
+     → Each unlocks with animation when reached
+     → Show what the reward/badge is for each milestone
+   - Achievement badges:
+     → "Perfect Week" (7 days 100%), "Iron Streak" (21 days), "No Miss" (0 missed days), etc.
+     → Locked badges shown as silhouettes until earned
+   - Completion screen with confetti animation when challenge ends
+
+5. CHALLENGE SETUP / CREATE NEW
+   - Step 1: Name + Purpose (2 fields, big and clear)
+   - Step 2: Duration (slider: 7 to 365 days) + Start date picker
+   - Step 3: Add daily tasks (dynamic list, + button to add more, drag to reorder, trash to delete)
+     → Each task has a name field
+     → Minimum 1 task, maximum 15
+   - Step 4: Set your reward (text field: "What will you give yourself?")
+   - Step 5: Optional milestone rewards (editable)
+   - Preview summary before creating
+   - "Start Challenge 🚀" button
+
+6. SETTINGS / CHALLENGE MANAGEMENT
+   - View all challenges (active + completed + archived)
+   - Edit current challenge (add/remove tasks, extend duration)
+   - Archive or delete a challenge
+   - Export challenge data as CSV
+   - Reset today's check-in
+
+═══════════════════════════════════════════
+REWARDS & GAMIFICATION SYSTEM
+═══════════════════════════════════════════
+- Streak fire emoji 🔥 with streak count on dashboard
+- Milestone pop-up modal when a milestone is hit:
+  → Confetti burst animation
+  → "You've reached Day 30! 🎉 Your milestone: [reward text]"
+  → Share card option (text summary of achievement)
+- Achievement badges with names and icons
+- Consistency score (0-100): weighted formula:
+  → (total ticks / total possible) × 100 with streak bonus
+- "You're on fire!" message when streak > 7
+- Motivational quotes shown daily based on progress % (low, medium, high)
+
+═══════════════════════════════════════════
+UI / DESIGN REQUIREMENTS
+═══════════════════════════════════════════
+- Dark mode by default (can toggle to light)
+- Color palette: Deep dark background (#0f0f0f), accent: vibrant purple/violet (#7c3aed)
+- Clean, minimal, mobile-first design
+- Large tap targets (check-in checkboxes minimum 48px)
+- Smooth transitions and micro-animations (task tick, progress ring fill, streak counter)
+- Confetti animation on milestone achievement (use canvas-confetti or pure CSS)
+- Progress ring: SVG circle with animated stroke-dashoffset
+- Heatmap: CSS grid of colored squares
+- Charts: use Recharts library
+- Font: Inter or system-ui
+- Bottom navigation bar on mobile (Home | Check In | Progress | Rewards)
+
+═══════════════════════════════════════════
+DATA & PERSISTENCE
+═══════════════════════════════════════════
+- All data in localStorage (no backend, no login)
+- Data structure:
+  {
+    challenges: [{
+      id, name, purpose, startDate, durationDays, endReward,
+      tasks: [{id, name}],
+      milestones: [{day, reward, achieved}],
+      logs: [{
+        date, completedTasks: [taskId], note, mood, timestamp
+      }]
+    }],
+    activeChallengeId,
+    settings: { darkMode, notifications }
+  }
+- Auto-save on every interaction
+- Handle edge cases: missing days (show as missed), future days (grayed out)
+
+═══════════════════════════════════════════
+SMART FEATURES
+═══════════════════════════════════════════
+- "Streak Saver": if you missed yesterday, show a warning banner today
+- "Best time to check in": learns your average check-in time, shows reminder banner
+- Consistency forecast: "At your current pace, you'll finish at X%"
+- "Weakest habit" alert: highlights the task you miss most often
+- Auto-archive challenge when end date passes
+- Allow check-in for yesterday if today you forgot (only yesterday, not older)
+
+═══════════════════════════════════════════
+TECH STACK
+═══════════════════════════════════════════
+- React 18 with hooks (useState, useEffect, useCallback, useMemo)
+- Tailwind CSS for styling
+- Recharts for bar/line charts
+- date-fns for date logic
+- localStorage for all persistence
+- Single file deliverable (or minimal files)
+- No backend, no auth, no API calls
+
+Deliver a complete, working application. Every screen should be functional. Include sample data so the app looks populated on first load (a demo challenge already in progress with 15 days of logs).

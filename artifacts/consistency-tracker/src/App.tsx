@@ -10,8 +10,9 @@ import Rewards from './pages/rewards';
 import Settings from './pages/settings';
 import CreateChallenge from './pages/create-challenge';
 import DailyIntention from './pages/daily-intention';
+import Todo from './pages/todo';
 
-export type View = 'home' | 'check-in' | 'progress' | 'rewards' | 'settings' | 'create' | 'daily';
+export type View = 'home' | 'check-in' | 'progress' | 'rewards' | 'settings' | 'create' | 'daily' | 'todo';
 
 const PAGE_TITLES: Record<View, string> = {
   'home':      'Consistency Tracker — Dashboard',
@@ -21,6 +22,7 @@ const PAGE_TITLES: Record<View, string> = {
   'settings':  'Settings | Consistency Tracker',
   'create':    'Create a New Challenge | Consistency Tracker',
   'daily':     'Daily Intention | Consistency Tracker',
+  'todo':      'Aaj Ka Kaam | Consistency Tracker',
 };
 
 function App() {
@@ -50,6 +52,7 @@ function App() {
         {currentView === 'settings' && <Settings onViewChange={setCurrentView} />}
         {currentView === 'create' && <CreateChallenge onViewChange={setCurrentView} />}
         {currentView === 'daily' && <DailyIntention onViewChange={setCurrentView} />}
+        {currentView === 'todo' && <Todo />}
       </Layout>
       <Toaster />
     </TooltipProvider>

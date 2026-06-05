@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from '../App';
-import { Home, CheckSquare, BarChart3, Trophy, Settings as SettingsIcon, Zap, Target } from 'lucide-react';
+import { Home, CheckSquare, BarChart3, Trophy, Settings as SettingsIcon, Zap, Target, ClipboardList } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Layout({ children, currentView, onViewChange }: { children: React.ReactNode, currentView: View, onViewChange: (v: View) => void }) {
@@ -8,6 +8,7 @@ export default function Layout({ children, currentView, onViewChange }: { childr
     { view: 'home', icon: Home, label: 'Home' },
     { view: 'check-in', icon: CheckSquare, label: 'Check In' },
     { view: 'daily', icon: Target, label: 'Today' },
+    { view: 'todo', icon: ClipboardList, label: 'Todo' },
     { view: 'progress', icon: BarChart3, label: 'Progress' },
     { view: 'rewards', icon: Trophy, label: 'Rewards' },
     { view: 'settings', icon: SettingsIcon, label: 'Settings' },

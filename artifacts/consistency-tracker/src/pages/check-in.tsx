@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TOPIC_COLORS, DIFFICULTY_COLORS, getTopicLabel } from '@/lib/utils';
+import { TOPIC_COLORS, DIFFICULTY_COLORS, getTopicLabel, cn } from '@/lib/utils';
 import { CheckCircle2, Circle, CalendarDays, ChevronRight, Home, Sparkles, XCircle } from 'lucide-react';
 
 const MOODS = [
@@ -98,7 +98,7 @@ export default function CheckIn({ onViewChange }: { onViewChange: (v: View) => v
 
   const todayLog = challenge.logs.find(l => l.date === todayStr);
   const yesterdayLog = challenge.logs.find(l => l.date === yesterdayStr);
-  const showYesterdayOffer = !isYesterday && !yesterdayLog && challenge.startDate <= yesterdayStr;
+  const showYesterdayOffer = !isYesterday && challenge.startDate <= yesterdayStr;
 
   const getTaskCompletionRate = (taskId: string) => {
     if (challenge.logs.length === 0) return 0;
@@ -181,14 +181,32 @@ export default function CheckIn({ onViewChange }: { onViewChange: (v: View) => v
       {showYesterdayOffer && (
         <motion.div
           initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/20"
+          className={cn(
+            "flex items-center justify-between p-3 rounded-xl border",
+            yesterdayLog 
+              ? "bg-blue-500/5 border-blue-500/10" 
+              : "bg-amber-500/10 border-amber-500/20"
+          )}
         >
-          <div className="flex items-center gap-2 text-amber-400 text-sm">
+          <div className={cn(
+            "flex items-center gap-2 text-sm",
+            yesterdayLog ? "text-blue-400/80" : "text-amber-400"
+          )}>
             <CalendarDays className="w-4 h-4" />
-            <span>Missed yesterday? You can still log it.</span>
+            <span>{yesterdayLog ? "View yesterday's check-in" : "Missed yesterday? You can still log it."}</span>
           </div>
-          <Button variant="ghost" size="sm" className="text-amber-400 hover:text-amber-300 h-7 px-3 text-xs" onClick={() => setIsYesterday(true)}>
-            Log it <ChevronRight className="w-3 h-3 ml-0.5" />
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className={cn(
+              "h-7 px-3 text-xs",
+              yesterdayLog 
+                ? "text-blue-400/80 hover:text-blue-300" 
+                : "text-amber-400 hover:text-amber-300"
+            )} 
+            onClick={() => setIsYesterday(true)}
+          >
+            {yesterdayLog ? "View" : "Log it"} <ChevronRight className="w-3 h-3 ml-0.5" />
           </Button>
         </motion.div>
       )}

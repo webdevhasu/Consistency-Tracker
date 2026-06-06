@@ -98,7 +98,7 @@ export default function CheckIn({ onViewChange }: { onViewChange: (v: View) => v
 
   const todayLog = challenge.logs.find(l => l.date === todayStr);
   const yesterdayLog = challenge.logs.find(l => l.date === yesterdayStr);
-  const showYesterdayOffer = !isYesterday && !todayLog && !yesterdayLog;
+  const showYesterdayOffer = !isYesterday && !yesterdayLog && challenge.startDate <= yesterdayStr;
 
   const getTaskCompletionRate = (taskId: string) => {
     if (challenge.logs.length === 0) return 0;

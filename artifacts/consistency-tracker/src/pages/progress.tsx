@@ -51,11 +51,24 @@ export default function Progress({ onViewChange }: { onViewChange: (v: View) => 
       if (d.status === 'full') { tempStreak++; if (tempStreak > bestStreak) bestStreak = tempStreak; totalDone++; }
       else if (d.status === 'partial' || d.status === 'missed') { tempStreak = 0; if (d.status === 'missed') totalMissed++; }
     }
-    // current streak (from end)
-    for (let i = heatmapData.length - 1; i >= 0; i--) {
-      if (heatmapData[i].status === 'full') streak++;
-      else break;
+    // current streak
+    const todayStrProg = format(new Date(), 'yyyy-MM-dd');
+    let todayIdx = heatmapData.findIndex(d => d.date === todayStrProg);
+    if (todayIdx === -1) todayIdx = heatmapData.length - 1;
+    
+    let currentStreak = 0;
+    if (heatmapData[todayIdx]?.status === 'full') {
+      for (let i = todayIdx; i >= 0; i--) {
+        if (heatmapData[i].status === 'full') currentStreak++;
+        else break;
+      }
+    } else {
+      for (let i = todayIdx - 1; i >= 0; i--) {
+        if (heatmapData[i]?.status === 'full') currentStreak++;
+        else break;
+      }
     }
+    streak = currentStreak;
 
     // Line chart
     const lineData = challenge.logs

@@ -46,10 +46,23 @@ export default function Home({ onViewChange }: { onViewChange: (v: View) => void
 
     // Streak
     let streak = 0;
-    const sortedLogs = [...challenge.logs].sort((a, b) => b.date.localeCompare(a.date));
-    for (const log of sortedLogs) {
-      if (log.completedTasks.length === numTasks) streak++;
-      else break;
+    let currentDateStr = todayStr;
+    const logsMap = new Map(challenge.logs.map(l => [l.date, l]));
+    
+    if (logsMap.get(todayStr)?.completedTasks.length === numTasks) {
+      currentDateStr = todayStr;
+    } else {
+      currentDateStr = yesterdayStr;
+    }
+
+    while (true) {
+      const log = logsMap.get(currentDateStr);
+      if (log && log.completedTasks.length === numTasks) {
+        streak++;
+        currentDateStr = format(subDays(parseISO(currentDateStr), 1), 'yyyy-MM-dd');
+      } else {
+        break;
+      }
     }
 
     // Weakest task
